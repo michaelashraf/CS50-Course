@@ -1,3 +1,8 @@
+/* this is a program to decipher an incoming text using a certain key 
+ * that the user passes to the main function
+ * 
+ *  WELCOME TO CAESAR 1.0    */
+
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
@@ -75,5 +80,6 @@ int main(int argc, string argv[])
     {
         printf("Usage: ./caesar key\n");   //displaying the right
         //usage for the user
+        return 1;
     }
 }
