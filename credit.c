@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<cs50.h>
 
 int main(){
 
@@ -8,9 +9,7 @@ int digitCounter=0;
 
 int sum=0;
 
-printf("%s","enter credit card number:");
-
-scanf("%llu",&creditCard);
+creditCard=get_long("Number: ");
 
 int digit1=(creditCard)%10;
 
@@ -119,10 +118,6 @@ if(digitCounter==16){
         }
     }
     
-    else
-    {
-        printf("INVALID\n");
-    }
 }
 
 if(digitCounter==13){
