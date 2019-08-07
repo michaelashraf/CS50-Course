@@ -49,13 +49,16 @@ while(creditCard!=0){
 
     creditCard=creditCard/10;
 }
-if(digitCounter!=13 && digitCounter!=15 && digitCounter!=16 ){
+if(digitCounter!=13 && digitCounter!=15 && digitCounter!=16 )
+{
 
     printf("INVALID\n");
 }
-if(digitCounter==15){
+if(digitCounter==15)
+{
 
-    if((digit15==3 && digit14==4)||(digit15==3 && digit14==7)){
+    if((digit15==3 && digit14==4)||(digit15==3 && digit14==7))
+    {
         digit2=digit2*2;
         digit4=digit4*2;
         digit6=digit6*2;
@@ -65,7 +68,8 @@ if(digitCounter==15){
         digit14=digit14*2;
         sum=(digit2%10)+((digit2/10)%10)+(digit4%10)+((digit4/10)%10)+(digit6%10)+((digit6/10)%10)+(digit8%10)+((digit8/10)%10)+(digit10%10)+((digit10/10)%10)+(digit12%10)+((digit12/10)%10)+(digit14%10)+((digit14/10)%10);
         sum=sum+digit1+digit3+digit5+digit7+digit9+digit11+digit13+digit15;
-        if(sum%10==0){
+        if(sum%10==0)
+        {
             printf("AMEX\n");
         }
         else{
@@ -77,9 +81,12 @@ if(digitCounter==15){
     }
 
 }
-if(digitCounter==16){
+if(digitCounter==16)
+{
+    
 
-    if(digit16==5 && (digit15>=1 &&digit15<6)){
+    if(digit16==5 && (digit15>=1 &&digit15<6))
+    {
         digit2=digit2*2;
         digit4=digit4*2;
         digit6=digit6*2;
@@ -90,16 +97,19 @@ if(digitCounter==16){
         digit16=digit16*2;
         sum=(digit2%10)+((digit2/10)%10)+(digit4%10)+((digit4/10)%10)+(digit6%10)+((digit6/10)%10)+(digit8%10)+((digit8/10)%10)+(digit10%10)+((digit10/10)%10)+(digit12%10)+((digit12/10)%10)+(digit14%10)+((digit14/10)%10)+(digit16%10)+((digit16/10)%10);
         sum=sum+digit1+digit3+digit5+digit7+digit9+digit11+digit13+digit15;
-         if(sum%10==0){
+        if(sum%10==0)
+        {
             printf("MASTERCARD\n");
         }
-        else{
+        else 
+        {
             printf("INVALID\n");
         }
 
     }
     
-    if(digit16==4){
+   else if(digit16==4)
+    {
         digit2=digit2*2;
         digit4=digit4*2;
         digit6=digit6*2;
@@ -110,14 +120,20 @@ if(digitCounter==16){
         digit16=digit16*2;
         sum=(digit2%10)+((digit2/10)%10)+(digit4%10)+((digit4/10)%10)+(digit6%10)+((digit6/10)%10)+(digit8%10)+((digit8/10)%10)+(digit10%10)+((digit10/10)%10)+(digit12%10)+((digit12/10)%10)+(digit14%10)+((digit14/10)%10)+(digit16%10)+((digit16/10)%10);
         sum=sum+digit1+digit3+digit5+digit7+digit9+digit11+digit13+digit15;
-         if(sum%10==0){
+         if(sum%10==0)
+         {
             printf("VISA\n");
-        }
-        else{
+         }
+        else
+        {
             printf("INVALID\n");
         }
     }
     
+   else 
+   {
+       printf("INVALID\n");
+   }
 }
 
 if(digitCounter==13){
