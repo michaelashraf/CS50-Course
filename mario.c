@@ -42,27 +42,29 @@ int main(void)
     // printing the pyramid
     for (int i = 1; i <= height; i++)   // iterating over the rows
     {
-        for (int j = 1; j <= height + 10; j++) //iterating over the columns
+        for (int j = 1; j <= 2 * height + 2; j++) //iterating over the columns
         {
-            if (i + j < 9 || j == 9 || j == 10)
+            if ((i + j <= height) || (j == height + 1) || (j == height + 2))
             {
                 printf(" "); //representing the gap or the right part of spaces in the grid above
             }
-            
-            else if (j > 10 && j > i + 10)
+
+            else if (j > height + 2 && j > i + height + 2)
             {
                 printf(" "); //representing the left part of spaces in the grid above
             }
-            
+
             else
             {
                 printf("#"); //representing the two adjacent pyramids
             }
-            
+
         }
-        
+
         printf("\n");
     }
+
+   
     
     
 }
