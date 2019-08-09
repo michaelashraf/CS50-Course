@@ -51,7 +51,7 @@ int main(void)
 
             else if (j > height + 2 && j > i + height + 2)
             {
-                printf(" "); //representing the left part of spaces in the grid above
+                continue;   //representing the left part of spaces in the grid above
             }
 
             else
@@ -60,7 +60,7 @@ int main(void)
             }
 
         }
-
+        
         printf("\n");
     }
 
