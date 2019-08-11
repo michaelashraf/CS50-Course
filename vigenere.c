@@ -111,6 +111,8 @@ int main(int argc, string argv[])
         else
         {
             printf("Usage: ./vigenere keyword\n");
+            
+            return 1;
         }
 
     }
