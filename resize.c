@@ -6,6 +6,15 @@
 
 #include "bmp.h"
 
+void write_pixels(int original_width,int resize_factor);
+
+void add_padding(int resized_padding);
+
+
+ FILE *inptr;
+
+ FILE *outptr;
+
 int main(int argc, char *argv[])
 {
     // ensure proper usage
@@ -38,7 +47,7 @@ int main(int argc, char *argv[])
 
 
     // open input file
-    FILE *inptr = fopen(infile, "r");
+    inptr = fopen(infile, "r");
     if (inptr == NULL)
     {
         fprintf(stderr, "Could not open %s.\n", infile);
@@ -46,7 +55,7 @@ int main(int argc, char *argv[])
     }
 
     // open output file
-    FILE *outptr = fopen(outfile, "w");
+    outptr = fopen(outfile, "w");
     if (outptr == NULL)
     {
         fclose(inptr);
@@ -108,52 +117,19 @@ int main(int argc, char *argv[])
         //for n-1 times
         for (int j = 0; j < resize_factor - 1; j++)
         {
-            // iterate over pixels in scanline
-            for (int k = 0; k < original_width; k++)
-            {
-                // temporary storage
-                RGBTRIPLE triple;
+            write_pixels(original_width,resize_factor);
 
-                // read RGB triple from infile
-                fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-
-                //write the pixel for n times
-                for (int l = 0; l < resize_factor; l++)
-                {
-                    // write RGB triple to outfile
-                    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-                }
-            }
-            //add padding to the outfile
-            for (int m = 0; m < resized_padding; m++)
-            {
-                fputc(0x00, outptr);
-            }
+            add_padding(resized_padding);
 
             //send infile cursor back
             fseek(inptr, -1 * (original_width * sizeof(RGBTRIPLE)), SEEK_CUR);
         }
 
-        for (int k = 0; k < original_width; k++)
-        {
-            // temporary storage
-            RGBTRIPLE triple;
+        write_pixels(original_width,resize_factor);
 
-            // read RGB triple from infile
-            fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+        add_padding(resized_padding);
 
-            for (int l = 0; l < resize_factor; l++)
-            {
-                // write RGB triple to outfile
-                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-            }
-        }
-        // then add it back (to demonstrate how)
-        for (int m = 0; m < resized_padding; m++)
-        {
-            fputc(0x00, outptr);
-        }
-
+        //skip over padding in infile
         fseek(inptr, old_padding, SEEK_CUR);
 
 
@@ -167,4 +143,32 @@ int main(int argc, char *argv[])
 
     // success
     return 0;
+}
+
+void write_pixels(int original_width,int resize_factor)
+{
+    for (int k = 0; k < original_width; k++)
+    {
+        // temporary storage
+        RGBTRIPLE triple;
+
+        // read RGB triple from infile
+        fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+
+        //write the pixel for n times
+        for (int l = 0; l < resize_factor; l++)
+        {
+            // write RGB triple to outfile
+            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+        }
+    }
+}
+
+void add_padding(int resized_padding)
+{
+    // then add it back (to demonstrate how)
+    for (int m = 0; m < resized_padding; m++)
+    {
+        fputc(0x00, outptr);
+    }
 }
