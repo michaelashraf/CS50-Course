@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    for (int i = 0 , n = strlen(argv[1]); i < n; i++)
+    for (int i = 0, n = strlen(argv[1]); i < n; i++)
     {
         if (argv[1][i] < '0' || argv[1][i] > '9')
         {
@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 
     if (resize_factor <= 0 || resize_factor > 100)
     {
-         fprintf(stderr, "n, the resize factor, must satisfy 0 < n <= 100.\n");
-         return 1;
+        fprintf(stderr, "n, the resize factor, must satisfy 0 < n <= 100.\n");
+        return 1;
     }
 
     // remember filenames
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
     }
 
     // read infile's BITMAPFILEHEADER
-     BITMAPFILEHEADER bf;
+    BITMAPFILEHEADER bf;
     fread(&bf, sizeof(BITMAPFILEHEADER), 1, inptr);
 
     // read infile's BITMAPINFOHEADER
