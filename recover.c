@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     }
 
     //open the forensic image file
-    readptr = fopen(argv[1] ,"r");
+    readptr = fopen(argv[1], "r");
 
     //file cannot be opened
     if (readptr == NULL)
