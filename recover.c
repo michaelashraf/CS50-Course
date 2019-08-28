@@ -101,4 +101,6 @@ int main(int argc, char *argv[])
     fclose(img);
 
     fclose(readptr);
+
+    return 0;
 }
