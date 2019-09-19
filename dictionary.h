@@ -15,5 +15,6 @@ unsigned int size(void);
 bool check(const char *word);
 bool unload(void);
 bool same_str(const char *a , const char *b);
+long long int hash2(const char *s);
 
 #endif // DICTIONARY_H
