@@ -9,7 +9,7 @@
 #include "dictionary.h"
 
 // Represents number of buckets in a hash table
-#define N 26
+#define N (long long int)1e6
 
 // Represents a node in a hash table
 typedef struct node
@@ -22,10 +22,23 @@ node;
 // Represents a hash table
 node *hashtable[N];
 
-// Hashes word to a number between 0 and 25, inclusive, based on its first letter
-unsigned int hash(const char *word)
+// Hashes word to a number between 0 and 999999, inclusive, based on its first letter
+long long int hash(const char *s)
 {
-    return tolower(word[0]) - 'a';
+    const int P = 53;
+
+    long long int p_pow = 1;
+
+    long long int hash_value = 0;
+
+    for (int i = 0; i < strlen(s); i++)
+    {
+        hash_value = (hash_value + (tolower(s[i]) - '\'' + 1) * p_pow) % N;
+
+        p_pow =(p_pow * P) % N;
+    }
+
+    return hash_value;
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -53,7 +66,7 @@ bool load(const char *dictionary)
     while (fscanf(file, "%s", word) != EOF)
     {
         //hash the word to a bucket of the hashtable
-        unsigned int key = hash(word);
+        long long int key = hash(word);
 
         //allocate memory for the new node
         node *new_node = malloc(sizeof(node));
@@ -119,7 +132,7 @@ unsigned int size(void)
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    unsigned int key = hash(word);
+    long long int key = hash(word);
 
     node *cursor = hashtable[key];
 
