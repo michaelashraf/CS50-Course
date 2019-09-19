@@ -9,7 +9,7 @@
 #include "dictionary.h"
 
 // Represents number of buckets in a hash table
-#define N (long long int)1e6
+#define N (long long int)1e6+10
 
 // Represents a node in a hash table
 typedef struct node
