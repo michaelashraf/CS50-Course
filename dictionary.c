@@ -35,7 +35,7 @@ long long int hash(const char *s)
     {
         hash_value = (hash_value + (tolower(s[i]) - '\'' + 1) * p_pow) % N;
 
-        p_pow =(p_pow * P) % N;
+        p_pow = (p_pow * P) % N;
     }
 
     return hash_value;
@@ -84,14 +84,14 @@ bool load(const char *dictionary)
         {
             hashtable[key] = new_node;
 
-            strcpy(new_node->word , word);
+            strcpy(new_node->word, word);
 
             new_node->next = NULL;
         }
         //insert new node at the beginning of the linked list
         else
         {
-            strcpy(new_node->word , word);
+            strcpy(new_node->word, word);
 
             new_node->next = hashtable[key];
 
@@ -138,7 +138,7 @@ bool check(const char *word)
 
     while (cursor != NULL)
     {
-        bool same = same_str(word , cursor->word);
+        bool same = same_str(word, cursor->word);
 
         if (same == true)
         {
@@ -182,7 +182,7 @@ bool unload(void)
     return true;
 }
 
-bool same_str(const char *a , const char *b)
+bool same_str(const char *a, const char *b)
 {
     if (strlen(a) != strlen(b))
     {
@@ -191,7 +191,7 @@ bool same_str(const char *a , const char *b)
 
     else
     {
-        for (int i = 0 , n = strlen(a) ; i < n ; i++)
+        for (int i = 0, n = strlen(a) ; i < n ; i++)
         {
             int diff = tolower(a[i]) - tolower(b[i]);
 
