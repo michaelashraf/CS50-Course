@@ -33,7 +33,7 @@ long long int hash(const char *s)
 
     for (int i = 0; i < strlen(s); i++)
     {
-        hash_value = (hash_value + (s[i] - '\'' + 1) * p_pow) % N;
+        hash_value = (hash_value + (tolower(s[i]) - '\'' + 1) * p_pow) % N;
 
         p_pow =(p_pow * P) % N;
     }
