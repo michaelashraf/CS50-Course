@@ -9,7 +9,7 @@
 #include "dictionary.h"
 
 // Represents number of buckets in a hash table
-#define N (long long int)1e6+10
+#define N (long long int)4e5
 
 // Represents a node in a hash table
 typedef struct node
@@ -23,22 +23,17 @@ node;
 node *hashtable[N];
 
 // Hashes word to a number between 0 and 999999, inclusive, based on its first letter
-long long int hash(const char *s)
+
+
+unsigned long hash(const char *str)
 {
-    const int P = 53;
+    unsigned long hash = 5381;
+    int c;
 
-    long long int p_pow = 1;
+    while ((c = *str++))
+        hash = ((hash << 5) + hash) + tolower(c); /* hash * 33 + c */
 
-    long long int hash_value = 0;
-
-    for (int i = 0; i < strlen(s); i++)
-    {
-        hash_value = (hash_value + (tolower(s[i]) - '\'' + 1) * p_pow) % N;
-
-        p_pow =(p_pow * P) % N;
-    }
-
-    return hash_value;
+    return hash % N;
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -66,7 +61,7 @@ bool load(const char *dictionary)
     while (fscanf(file, "%s", word) != EOF)
     {
         //hash the word to a bucket of the hashtable
-        long long int key = hash(word);
+        unsigned long key = hash(word);
 
         //allocate memory for the new node
         node *new_node = malloc(sizeof(node));
@@ -84,14 +79,14 @@ bool load(const char *dictionary)
         {
             hashtable[key] = new_node;
 
-            strcpy(new_node->word , word);
+            strcpy(new_node->word, word);
 
             new_node->next = NULL;
         }
         //insert new node at the beginning of the linked list
         else
         {
-            strcpy(new_node->word , word);
+            strcpy(new_node->word, word);
 
             new_node->next = hashtable[key];
 
@@ -132,13 +127,13 @@ unsigned int size(void)
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    long long int key = hash(word);
+    unsigned long key = hash(word);
 
     node *cursor = hashtable[key];
 
     while (cursor != NULL)
     {
-        bool same = same_str(word , cursor->word);
+        bool same = same_str(word, cursor->word);
 
         if (same == true)
         {
@@ -182,7 +177,7 @@ bool unload(void)
     return true;
 }
 
-bool same_str(const char *a , const char *b)
+bool same_str(const char *a, const char *b)
 {
     if (strlen(a) != strlen(b))
     {
@@ -191,7 +186,7 @@ bool same_str(const char *a , const char *b)
 
     else
     {
-        for (int i = 0 , n = strlen(a) ; i < n ; i++)
+        for (int i = 0, n = strlen(a) ; i < n ; i++)
         {
             int diff = tolower(a[i]) - tolower(b[i]);
 
